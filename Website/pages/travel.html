@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.jsdelivr.net/npm/exifreader/dist/exif-reader.min.js"></script>
+
+    <style>
+        /* Left navigation bar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background-color: #222;
+            padding-top: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Navigation links */
+        .sidebar a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            font-size: 18px;
+        }
+
+        /* Highlight links when the mouse is over them */
+        .sidebar a:hover {
+            background-color: #444;
+            color: #4B89A6;
+        }
+
+        /* Main page content */
+        .content {
+            margin-left: 250px;
+            padding: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Left Navigation Bar -->
+    <div class="sidebar">
+        <a href="../index.html" class="home-link">Andrew Moodie</a>
+        <a href="../pages/photography.html">Photography</a>
+        <a href="../pages/travel.html" class="active">Travel</a>
+        <a href="../pages/projects.html">Projects</a>
+    </div>
+
+    <div class="content">
+        <h1>Travel</h1>
+
+        <p style="margin-bottom: 15px"> My international travel experience is limited to an afternoon exploring Sault-Ste. Marie Canada, however I do have extensive American travel experience 
+            (I just need to visit 6 more states until I have been to all 50!) My new goal is to summit the highest peak in each state, and I created the map below to track my progress and 
+            showcase my albums from each highpoint.  
+</p>
+</body>
+
+<head>
+
+    <!-- <title>State Highpoints I have summited</title> -->
+
+    <link rel="stylesheet" href="../style.css">
+
+</head>
+
+<style>
+    body{
+    background: #f4f4f4;
+    color: #222;
+}
+</style>
+
+<body>
+
+    <main class="map-page">
+
+        <!-- <header>
+
+            <h1>State Highpoints I have summited</h1>
+
+            <p>
+                Click on a visted state to see my photo/album from the hike.
+            </p>
+
+        </header> -->
+
+
+        <div class="map-container">
+
+
+            <!-- =====================================
+                 MAP
+                 ===================================== -->
+
+            <div class="map-wrapper">
+
+                <!--
+                    JavaScript will load us.svg
+                    into this container.
+                -->
+
+                <div id="us-map-container"></div>
+
+            </div>
+
+
+            <!-- =====================================
+                 STATE INFORMATION PANEL
+                 ===================================== -->
+
+            <aside id="state-info" class="state-info">
+
+                <img
+                    id="state-image"
+                    src="highpointPhotos/default.jpg"
+                    alt="United States"
+                >
+
+                <div class="state-text">
+
+                    <h2 id="state-name">
+                        Select a State
+                    </h2>
+
+                    <p id="state-description">
+
+                        Hover over a state on the map
+                        to see information about that state.
+
+                    </p>
+
+
+                </div>
+
+            </aside>
+
+        </div>
+
+    </main>
+
+        <!-- ==========================================
+         FULL-SCREEN PHOTO VIEWER / LIGHTBOX
+         ========================================== -->
+
+    <div
+        id="photo-lightbox"
+        class="photo-lightbox"
+        aria-hidden="true"
+    >
+
+        <!-- Close button -->
+
+        <button
+            id="lightbox-close"
+            class="lightbox-close"
+            type="button"
+            aria-label="Close photo viewer"
+        >
+            &times;
+        </button>
+
+
+        <!-- Previous photo -->
+
+        <button
+            id="lightbox-prev"
+            class="lightbox-navigation lightbox-prev"
+            type="button"
+            aria-label="Previous photograph"
+        >
+            &#10094;
+        </button>
+
+
+        <!-- Image area -->
+
+        <div class="lightbox-content">
+
+            <img
+                id="lightbox-image"
+                src=""
+                alt=""
+            >
+
+
+            <div
+                id="lightbox-caption"
+                class="lightbox-caption"
+            >
+            </div>
+
+        </div>
+
+
+        <!-- Next photo -->
+
+        <button
+            id="lightbox-next"
+            class="lightbox-navigation lightbox-next"
+            type="button"
+            aria-label="Next photograph"
+        >
+            &#10095;
+        </button>
+
+
+        <!-- Photo counter -->
+
+        <div
+            id="lightbox-counter"
+            class="lightbox-counter"
+        >
+            1 / 1
+        </div>
+
+    </div>
+
+    <script src="map.js"></script>
+
+</body>
+
+</html>

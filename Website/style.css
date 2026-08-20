@@ -1,0 +1,1553 @@
+/* =========================================
+   GENERAL PAGE
+   ========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+    background: #f4f4f4;
+    color: #222;
+}
+
+
+.map-page {
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    padding: 30px;
+}
+
+
+/* =========================================
+   HEADER
+   ========================================= */
+
+header {
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+header h1 {
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #fdfdfd;
+}
+
+
+/* =========================================
+   MAIN LAYOUT
+   ========================================= */
+
+.map-container {
+
+    display: flex;
+
+    gap: 30px;
+
+    align-items: flex-start;
+}
+
+
+/* =========================================
+   MAP
+   ========================================= */
+
+.map-wrapper {
+
+    flex: 1;
+
+    min-width: 0; /*necessary?*/
+
+    background: white;
+
+    border-radius: 10px;
+
+    padding: 10px;
+
+    box-shadow:
+        0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+/*
+    This is where us.svg gets inserted.
+*/
+
+#us-map-container {
+
+    width: 100%;
+
+    line-height: 0;
+}
+
+
+/*
+    Make the SVG responsive.
+*/
+
+#us-map {
+
+    width: 100%;
+
+    height: auto;
+
+    display: block;
+}
+
+
+/* =========================================
+   STATES
+   ========================================= */
+
+
+/*
+    Default state color
+*/
+
+#us-map .state {
+
+    fill: #d9d9d9 /*important?*/;
+
+    stroke: white;
+
+    stroke-width: 1;
+
+    cursor: pointer;
+
+    transition:
+        fill 0.2s ease,
+        stroke 0.2s ease;
+}
+
+
+/*
+    State being hovered over
+*/
+
+#us-map .state:hover {
+
+    fill: #6baed6 !important;
+
+    stroke: #333;
+
+    stroke-width: 2;
+}
+
+#us-map .state:focus {
+
+    outline: none;
+
+  /*   fill: #6baed6 !important;
+
+    stroke: #333;
+
+    stroke-width: 2; */
+}
+
+
+/*
+    Visited state
+*/
+
+#us-map .state.visited {
+
+    fill: #66c2a5 !important;
+}
+
+
+/*
+    Visited state being hovered over
+*/
+
+#us-map .state.visited:hover {
+
+    fill: #66c2a5;
+}
+
+
+/*
+    Washington D.C.
+
+    Your SVG includes D.C., but we don't want
+    it treated as one of the 50 states.
+*/
+
+#us-map #DC {
+
+    display: none;
+}
+
+
+/* =========================================
+   INFORMATION PANEL
+   ========================================= */
+
+.state-info {
+
+    width: 350px;
+
+    min-width: 300px;
+
+    background: white;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 2px 10px rgba(0, 0, 0, 0.1);
+
+    position: sticky;
+
+    top: 20px;
+}
+
+
+.state-info img {
+
+    width: 100%;
+
+    height: auto;/* 220px; */
+
+    object-fit: cover;
+
+    display: block;
+}
+/* =========================================
+   PREVIEW IMAGE
+   ========================================= */
+
+.preview-image-container {
+
+    width: 100%;
+
+    background: #eee;
+
+    overflow: hidden;
+
+    line-height: 0;
+}
+
+#state-image {
+
+    width: 100%;
+
+    height: auto;
+
+    display: block;
+
+
+    opacity: 1;
+
+    transform: scale(1);
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+
+    
+    #state-image.image-changing {
+
+        opacity: 0;
+
+        transform: scale(0.97);
+    }
+}
+
+
+/* =========================================
+   STATE TEXT
+   ========================================= */
+
+.state-text {
+
+    padding: 20px;
+}
+
+
+.state-text h2 {
+
+    margin-top: 0;
+
+    margin-bottom: 10px;
+}
+
+
+.state-text p {
+
+    line-height: 1.6;
+}
+
+
+.click-instruction {
+
+    font-size: 0.85rem;
+
+    color: #777;
+
+    border-top: 1px solid #ddd;
+
+    padding-top: 15px;
+
+    margin-top: 20px;
+}
+
+
+/* =========================================
+   LEGEND
+   ========================================= */
+
+.map-legend {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 25px;
+
+    margin-top: 15px;
+
+    font-size: 0.9rem;
+}
+
+
+.map-legend div {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+}
+
+
+.legend-box {
+
+    width: 18px;
+
+    height: 18px;
+
+    display: inline-block;
+
+    border: 1px solid #aaa;
+}
+
+/* ==========================================
+   FULL-SCREEN LIGHTBOX
+   ========================================== */
+
+.photo-lightbox {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    background:
+        rgba(0, 0, 0, 0.9);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 60px;
+
+    /*
+        Hidden by default
+    */
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+}
+
+
+/*
+    Visible lightbox
+*/
+
+.photo-lightbox.active {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+}
+
+
+/* ==========================================
+   LARGE IMAGE
+   ========================================== */
+
+.lightbox-content {
+
+    position: relative;
+
+    max-width: 90vw;
+
+    max-height: 90vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+#lightbox-image {
+
+    /*
+        Never make the image larger than
+        the available screen.
+    */
+
+    max-width: 90vw;
+
+    max-height: 82vh;
+
+    width: auto;
+
+    height: auto;
+
+    display: block;
+
+    /*
+        VERY IMPORTANT:
+
+        contain preserves the complete
+        original photograph and aspect ratio.
+    */
+
+    object-fit: contain;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 5px 30px rgba(0, 0, 0, 0.5);
+
+    /*
+        Starting state for the animation.
+    */
+
+    opacity: 0;
+
+    transform: scale(0.92);
+
+    transition:
+        opacity 0.35s ease,
+        transform 0.35s ease;
+}
+
+
+/*
+    When the lightbox is active,
+    animate the photograph into place.
+*/
+
+.photo-lightbox.active #lightbox-image {
+
+    opacity: 1;
+
+    transform: scale(1);
+}
+
+
+/* ==========================================
+   CLOSE BUTTON
+   ========================================== */
+
+.lightbox-close {
+
+    position: absolute;
+
+    top: 20px;
+
+    right: 25px;
+
+    z-index: 1002;
+
+    width: 50px;
+
+    height: 50px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, 0.15);
+
+    color: white;
+
+    font-size: 35px;
+
+    line-height: 45px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.lightbox-close:hover {
+
+    background:
+        rgba(255, 255, 255, 0.30);
+
+    transform: scale(1.05);
+}
+
+
+/* ==========================================
+   PREVIOUS / NEXT BUTTONS
+   ========================================== */
+
+.lightbox-navigation {
+
+    position: absolute;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    z-index: 1002;
+
+    width: 55px;
+
+    height: 70px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background:
+        rgba(255, 255, 255, 0.15);
+
+    color: white;
+
+    font-size: 35px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.lightbox-navigation:hover {
+
+    background:
+        rgba(255, 255, 255, 0.30);
+}
+
+
+.lightbox-prev {
+
+    left: 25px;
+}
+
+
+.lightbox-next {
+
+    right: 25px;
+}
+
+
+/* ==========================================
+   CAPTION
+   ========================================== */
+
+.lightbox-caption {
+
+    color: white;
+
+    text-align: center;
+
+    margin-top: 12px;
+
+    font-size: 16px;
+
+    max-width: 800px;
+}
+
+
+/* ==========================================
+   PHOTO COUNTER
+   ========================================== */
+
+.lightbox-counter {
+
+    position: absolute;
+
+    bottom: 20px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    color: white;
+
+    background:
+        rgba(0, 0, 0, 0.5);
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    font-size: 14px;
+}
+
+
+/* ==========================================
+   MOBILE
+   ========================================== */
+
+@media (max-width: 900px) {
+
+    .map-container {
+
+        flex-direction: column;
+    }
+
+
+    .map-wrapper {
+
+        width: 100%;
+    }
+
+
+    .state-info {
+
+        width: 100%;
+
+        position: static;
+    }
+
+
+    .photo-lightbox {
+
+        padding: 40px 15px;
+    }
+
+
+    #lightbox-image {
+
+        max-width: 95vw;
+
+        max-height: 80vh;
+    }
+
+
+    .lightbox-navigation {
+
+        width: 45px;
+
+        height: 55px;
+
+        font-size: 28px;
+    }
+
+
+    .lightbox-prev {
+
+        left: 8px;
+    }
+
+
+    .lightbox-next {
+
+        right: 8px;
+    }
+
+}
+
+
+/* ==========================================
+   REDUCED MOTION ACCESSIBILITY
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    #state-image,
+    #lightbox-image,
+    .photo-lightbox {
+
+        transition: none;
+    }
+
+}
+
+/* =========================================================
+   PHOTOGRAPHY PAGE
+   ========================================================= */
+
+
+/* ==========================================
+   BACKGROUND
+   ========================================== */
+
+.photography-page {
+
+    margin: 0;
+
+    min-height: 100vh;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color: white;
+
+    background-image:
+        url("pages/background.JPG");
+
+    background-size: cover;
+
+    background-position: center;
+
+   /*  background-attachment: fixed; */
+
+    background-repeat: no-repeat;
+
+}
+
+
+/*
+    Dark translucent overlay.
+
+    This makes the text and category cards
+    easier to see without hiding the photograph.
+*/
+
+/* .background-overlay {
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    inset: 0;
+
+    background:
+        rgba(0, 0, 0, 0.45);
+
+    z-index: 10;
+
+    pointer-events: none;
+
+} */
+
+
+/* ==========================================
+   MAIN CONTAINER
+   ========================================== */
+
+.photography-container {
+
+    position: relative;
+
+    z-index: 1;
+
+    min-height: 100vh;
+
+    padding: 60px 40px;
+}
+
+
+/* ==========================================
+   HEADER
+   ========================================== */
+
+.photography-header {
+
+    text-align: center;
+
+    margin-bottom: 50px;
+}
+
+
+.photography-header h1 {
+
+    margin: 0 0 10px;
+
+    font-size: 3rem;
+
+    font-weight: 600;
+
+    text-shadow:
+        0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+
+.photography-header p {
+
+    margin: 0;
+
+    font-size: 1.1rem;
+
+    opacity: 0.9;
+}
+
+/* ==========================================
+   VIDEO
+   ========================================== */
+
+   .snail-header {
+
+    text-align: center;
+
+    margin-bottom: 50px;
+}
+
+
+.snail-header h1 {
+
+    margin: 75px 0 30px;
+
+    font-size: 2.25rem;
+
+    font-weight: 600;
+
+    text-shadow:
+        0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+
+.snail-header p {
+
+    margin: 0;
+
+    font-size: 1rem;
+
+    opacity: 0.9;
+}
+
+
+/* ==========================================
+   CATEGORY GRID
+   ========================================== */
+
+.category-grid {
+
+    max-width: 1300px;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 20px;
+}
+
+
+/* ==========================================
+   CATEGORY CARD
+   ========================================== */
+
+.category-card {
+
+    position: relative;
+
+    aspect-ratio: 3 / 4;
+
+    overflow: hidden;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    background: #222;
+
+    box-shadow:
+        0 5px 20px
+        rgba(0, 0, 0, 0.4);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+/*
+    Hover effect
+*/
+
+.category-card:hover {
+
+    transform:
+        translateY(-8px)
+        scale(1.02);
+
+    box-shadow:
+        0 12px 30px
+        rgba(0, 0, 0, 0.55);
+}
+
+
+/* ==========================================
+   CATEGORY COVER IMAGE
+   ========================================== */
+
+.category-card img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition:
+        transform 0.5s ease;
+}
+
+
+/*
+    Zoom photograph when hovering
+*/
+
+.category-card:hover img {
+
+    transform: scale(1.08);
+}
+
+
+/* ==========================================
+   CATEGORY GRADIENT
+   ========================================== */
+
+.category-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.75),
+            rgba(0, 0, 0, 0.05)
+        );
+
+    pointer-events: none;
+}
+
+
+/* ==========================================
+   CATEGORY TITLE
+   ========================================== */
+
+.category-title {
+
+    position: absolute;
+
+    z-index: 2;
+
+    left: 20px;
+
+    bottom: 20px;
+
+    margin: 0;
+
+    color: white;
+
+    font-size: 1.7rem;
+
+    font-weight: 500;
+
+    text-shadow:
+        0 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+
+/* ==========================================
+   FULLSCREEN LIGHTBOX
+   ========================================== */
+
+.photo-lightbox {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    background:
+        rgba(0, 0, 0, 0.94);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 40px;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.35s ease,
+        visibility 0.35s ease;
+
+}
+
+
+/*
+    Active gallery
+*/
+
+.photo-lightbox.active {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+}
+
+
+/* ==========================================
+   LIGHTBOX CONTENT
+   ========================================== */
+
+.lightbox-content {
+
+    width: 100%;
+
+    max-width: 1200px;
+
+    max-height: 95vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+/* ==========================================
+   CATEGORY TITLE
+   ========================================== */
+
+.lightbox-category {
+
+    margin: 0 0 15px;
+
+    color: white;
+
+    font-size: 1.7rem;
+
+    font-weight: 400;
+
+    text-align: center;
+}
+
+
+/* ==========================================
+   IMAGE CONTAINER
+   ========================================== */
+
+.lightbox-image-container {
+
+    max-width: 90vw;
+
+    max-height: 65vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+/* ==========================================
+   LARGE PHOTOGRAPH
+   ========================================== */
+
+#lightbox-image {
+
+    max-width: 90vw;
+
+    max-height: 65vh;
+
+    width: auto;
+
+    height: auto;
+
+    display: block;
+
+    object-fit: contain;
+
+    border-radius: 4px;
+
+    box-shadow:
+        0 5px 35px
+        rgba(0, 0, 0, 0.6);
+
+    opacity: 0;
+
+    transform:
+        scale(0.94);
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+}
+
+
+/*
+    Image appears after loading
+*/
+
+.photo-lightbox.active #lightbox-image {
+
+    opacity: 1;
+
+    transform:
+        scale(1);
+}
+
+
+/* ==========================================
+   PHOTO INFORMATION
+   ========================================== */
+
+.photo-information {
+
+    width: 100%;
+
+    max-width: 900px;
+
+    margin-top: 15px;
+
+    color: white;
+
+    background:
+        rgba(255, 255, 255, 0.08);
+
+    border-radius: 8px;
+
+    padding: 15px 20px;
+
+    backdrop-filter: blur(8px);
+}
+
+
+/* ==========================================
+   EXIF INFORMATION
+   ========================================== */
+
+.exif-information {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: 20px;
+
+    padding-bottom: 12px;
+
+    border-bottom:
+        1px solid
+        rgba(255, 255, 255, 0.2);
+}
+
+
+/* Individual EXIF item */
+
+.exif-item {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    min-width: 90px;
+}
+
+
+/* EXIF label */
+
+.exif-label {
+
+    font-size: 0.7rem;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    color:
+        rgba(255, 255, 255, 0.6);
+
+    margin-bottom: 4px;
+}
+
+
+/* EXIF value */
+
+.exif-value {
+
+    font-size: 0.9rem;
+
+    color: white;
+
+    text-align: center;
+}
+
+
+/* ==========================================
+   DESCRIPTION
+   ========================================== */
+
+.photo-description {
+
+    padding-top: 10px;
+
+    text-align: center;
+}
+
+
+.photo-description p {
+
+    margin: 0;
+
+    line-height: 1.6;
+
+    font-size: 0.95rem;
+}
+
+
+/* ==========================================
+   CLOSE BUTTON
+   ========================================== */
+
+.lightbox-close {
+
+    position: absolute;
+
+    top: 20px;
+
+    right: 25px;
+
+    z-index: 1002;
+
+    width: 50px;
+
+    height: 50px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, 0.12);
+
+    color: white;
+
+    font-size: 35px;
+
+    line-height: 45px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.lightbox-close:hover {
+
+    background:
+        rgba(255, 255, 255, 0.25);
+
+    transform:
+        scale(1.05);
+}
+
+
+/* ==========================================
+   PREVIOUS / NEXT
+   ========================================== */
+
+.lightbox-navigation {
+
+    position: absolute;
+
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    z-index: 1002;
+
+    width: 55px;
+
+    height: 70px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background:
+        rgba(255, 255, 255, 0.12);
+
+    color: white;
+
+    font-size: 35px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.lightbox-navigation:hover {
+
+    background:
+        rgba(255, 255, 255, 0.25);
+}
+
+
+.lightbox-prev {
+
+    left: 20px;
+}
+
+
+.lightbox-next {
+
+    right: 20px;
+}
+
+
+/* ==========================================
+   PHOTO COUNTER
+   ========================================== */
+
+.lightbox-counter {
+
+    margin-top: 8px;
+
+    color:
+        rgba(255, 255, 255, 0.7);
+
+    font-size: 0.8rem;
+}
+
+
+/* ==========================================
+   MOBILE
+   ========================================== */
+
+@media (max-width: 1100px) {
+
+    .category-grid {
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .photography-container {
+
+        padding: 40px 20px;
+
+    }
+
+
+    .photography-header h1 {
+
+        font-size: 2.3rem;
+
+    }
+
+
+    .category-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 15px;
+
+    }
+
+
+    .category-title {
+
+        font-size: 1.3rem;
+
+        left: 15px;
+
+        bottom: 15px;
+
+    }
+
+
+    .photo-lightbox {
+
+        padding:
+            30px 10px;
+
+    }
+
+
+    #lightbox-image {
+
+        max-width: 95vw;
+
+        max-height: 55vh;
+
+    }
+
+
+    .photo-information {
+
+        max-width: 95vw;
+
+        padding: 12px;
+
+    }
+
+
+    .exif-information {
+
+        gap: 12px;
+
+    }
+
+
+    .exif-item {
+
+        min-width: 75px;
+
+    }
+
+
+    .lightbox-navigation {
+
+        width: 40px;
+
+        height: 55px;
+
+        font-size: 25px;
+
+    }
+
+
+    .lightbox-prev {
+
+        left: 5px;
+
+    }
+
+
+    .lightbox-next {
+
+        right: 5px;
+
+    }
+
+}
+
+
+@media (max-width: 450px) {
+
+    .category-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .category-card {
+
+        aspect-ratio:
+            16 / 9;
+
+    }
+
+
+    #lightbox-image {
+
+        max-height: 45vh;
+
+    }
+
+}
+
+
+/* ==========================================
+   REDUCED MOTION
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .category-card,
+    .category-card img,
+    .photo-lightbox,
+    #lightbox-image {
+
+        transition: none;
+
+    }
+
+}

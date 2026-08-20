@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        /* Left navigation bar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background-color: #222;
+            padding-top: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Navigation links */
+        .sidebar a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            font-size: 18px;
+        }
+
+        /* Highlight links when the mouse is over them */
+        .sidebar a:hover {
+            background-color: #444;
+            color: #4B89A6;
+        }
+
+        /* Main page content */
+        .content {
+            margin-left: 250px;
+            padding: 30px;
+        }
+    </style>
+
+<body>
+
+    <!-- Left Navigation Bar -->
+    <div class="sidebar">
+        <a href="../index.html" class="home-link">Andrew Moodie</a>
+        <a href="../pages/photography.html" class="active">Photography</a>
+        <a href="../pages/travel.html">Travel</a>
+        <a href="../pages/projects.html">Projects</a>
+    </div>
+
+</body>
+
+<div class="content">
+
+<title>Photography</title>
+
+    <link
+        rel="stylesheet"
+        href="../style.css"
+    >
+
+
+<body class="photography-page">
+
+
+    <!-- ==========================================
+         BACKGROUND
+         ========================================== -->
+
+    <div
+        class="background-overlay"
+        aria-hidden="true"
+    ></div>
+
+
+    <!-- ==========================================
+         MAIN PAGE
+         ========================================== -->
+
+    <main class="photography-container">
+
+
+        <header class="photography-header">
+
+            <h1>Photography</h1>
+
+            <p>
+                I like taking pictures, and buying the Sony a6100 (and the Tamron 18-300mm zoom lense) was one of my best investments. I have organized
+                some of my favorite photos into these general categories. If you like my work and are located near the Seattle or Indianapolis areas and 
+                are interested in a portrait session please feel free to reach out
+            </p>
+
+        </header>
+
+
+        <!-- ==========================================
+             PHOTOGRAPHY CATEGORY CARDS
+             ========================================== -->
+
+        <section
+            id="category-grid"
+            class="category-grid"
+            aria-label="Photography categories"
+        >
+
+            <!--
+                JavaScript will create the five
+                category cards here.
+            -->
+
+        </section>
+
+        <section>
+            <header class="snail-header">
+                <!-- <p style="margin-top:50px"></p> -->
+                <h1>Videography</h1>
+
+                    <p>
+                        I also like to take videos and am hoping to start peridiocally uploading content to my 
+                        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1" style="color: rgba(255, 250, 186, 0.89);">Youtube</a> channel later this year. This is a timelapse of my pet snail (and fish).
+                        <video height="400px" width="600px" src="SnailLapse.MOV" controls>
+                        <p style="margin-bottom: 15px"></p>
+                    </p>
+                </header>
+        </section>
+
+    </main>
+
+
+    <!-- ==========================================
+         GALLERY LIGHTBOX
+         ========================================== -->
+
+    <div
+        id="photo-lightbox"
+        class="photo-lightbox"
+        aria-hidden="true"
+    >
+
+
+        <!-- CLOSE BUTTON -->
+
+        <button
+            id="lightbox-close"
+            class="lightbox-close"
+            type="button"
+            aria-label="Close gallery"
+        >
+
+            &times;
+
+        </button>
+
+
+        <!-- PREVIOUS -->
+
+        <button
+            id="lightbox-prev"
+            class="lightbox-navigation lightbox-prev"
+            type="button"
+            aria-label="Previous photograph"
+        >
+
+            &#10094;
+
+        </button>
+
+
+        <!-- ==========================================
+             GALLERY CONTENT
+             ========================================== -->
+
+        <div class="lightbox-content">
+
+
+            <!-- CATEGORY TITLE -->
+
+            <h2
+                id="lightbox-category"
+                class="lightbox-category"
+            >
+            </h2>
+
+
+            <!-- PHOTOGRAPH -->
+
+            <div class="lightbox-image-container">
+
+                <img
+                    id="lightbox-image"
+                    src=""
+                    alt=""
+                >
+
+            </div>
+
+
+            <!-- ==========================================
+                 PHOTO INFORMATION
+                 ========================================== -->
+
+            <div
+                id="photo-information"
+                class="photo-information"
+            >
+
+                <div class="exif-information">
+
+
+                    <div class="exif-item">
+
+                        <span class="exif-label">
+                            ISO
+                        </span>
+
+                        <span
+                            id="photo-iso"
+                            class="exif-value"
+                        >
+                        </span>
+
+                    </div>
+
+
+                    <div class="exif-item">
+
+                        <span class="exif-label">
+                            Aperture
+                        </span>
+
+                        <span
+                            id="photo-aperture"
+                            class="exif-value"
+                        >
+                        </span>
+
+                    </div>
+
+
+                    <div class="exif-item">
+
+                        <span class="exif-label">
+                            Shutter
+                        </span>
+
+                        <span
+                            id="photo-shutter"
+                            class="exif-value"
+                        >
+                        </span>
+
+                    </div>
+
+
+                    <div class="exif-item">
+
+                        <span class="exif-label">
+                            Camera
+                        </span>
+
+                        <span
+                            id="photo-camera"
+                            class="exif-value"
+                        >
+                        </span>
+
+                    </div>
+
+
+                    <div class="exif-item">
+
+                        <span class="exif-label">
+                            Lens
+                        </span>
+
+                        <span
+                            id="photo-lens"
+                            class="exif-value"
+                        >
+                        </span>
+
+                    </div>
+
+
+                    <div class="exif-item">
+
+                        <span class="exif-label">
+                            Focal Length
+                        </span>
+
+                        <span
+                            id="photo-focal-length"
+                            class="exif-value"
+                        >
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="photo-description">
+
+                    <p
+                        id="photo-description"
+                    >
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- NEXT -->
+
+        <button
+            id="lightbox-next"
+            class="lightbox-navigation lightbox-next"
+            type="button"
+            aria-label="Next photograph"
+        >
+
+            &#10095;
+
+        </button>
+
+    </div>
+
+    </div>
+
+    <script src="exif-reader.js"></script>
+    <script src="photography.js"></script>
+
+
+</body>
+
+</head>
+
+</html>
