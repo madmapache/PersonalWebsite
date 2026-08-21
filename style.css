@@ -1551,3 +1551,37 @@ header p {
     }
 
 }
+
+/* ==========================================
+   MOBILE NAVIGATION
+   ========================================== */
+
+@media (max-width: 700px) {
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding-top: 0;
+    }
+
+    .sidebar a {
+        padding: 12px 10px;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .sidebar .home-link {
+        width: 100%;
+        font-size: 20px;
+        padding: 12px 10px;
+    }
+
+    .content {
+        margin-left: 0;
+        padding: 20px;
+    }
+}
