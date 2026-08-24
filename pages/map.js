@@ -108,7 +108,9 @@ const stateData = {
 
     "South Dakota": {
 
-        images: ["highpointPhotos/south-dakota/sd1.jpg"],
+        images: ["highpointPhotos/south-dakota/sd1.jpg", "highpointPhotos/south-dakota/sd2.jpg", "highpointPhotos/south-dakota/sd3.jpg", "highpointPhotos/south-dakota/sd4.jpg",
+            "highpointPhotos/south-dakota/sd4.jpg", "highpointPhotos/south-dakota/sd5.jpg"],
+            
         visited: true,
         description:
             `I completed the hike to Black Elk Peak after hiking to the top of Crazy Horse earlier that mountain. It was easily one of the highest
