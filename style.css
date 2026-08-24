@@ -740,7 +740,8 @@ header p {
 }
 
 @media screen and (max-width: 768px) {
-    body {
+    .photography-page {
+        background-image: none;
         background: #0a6d6d;
 
     }
