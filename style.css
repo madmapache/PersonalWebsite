@@ -742,7 +742,7 @@ header p {
 @media screen and (max-width: 768px) {
     .photography-page {
         background-image: none;
-        background: #0a6d6d;
+        background: #033d3d;
 
     }
     
@@ -862,6 +862,13 @@ header p {
     font-size: 1rem;
 
     opacity: 0.9;
+}
+
+.snail-header video {
+    display: block;
+    width: min(600px, 100%);
+    height: auto;
+    margin: 0 auto;
 }
 
 
