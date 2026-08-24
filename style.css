@@ -1590,3 +1590,13 @@ header p {
         height: auto;    
     }
 }
+
+.mobile-map-alert {
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+    .mobile-map-alert {
+        display: block;
+    }
+}
