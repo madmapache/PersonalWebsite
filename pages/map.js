@@ -14,7 +14,8 @@ const stateData = {
 
     "Connecticut": {
 
-        images: ["highpointPhotos/connecticut/ct1.jpg"],
+        images: ["highpointPhotos/connecticut/ct1.jpg", "highpointPhotos/connecticut/ct2.jpg", "highpointPhotos/connecticut/ct3.jpg", "highpointPhotos/connecticut/ct4.jpg",
+            "highpointPhotos/connecticut/ct5.jpg", "highpointPhotos/connecticut/ct6.jpg", "highpointPhotos/connecticut/ct7.jpg", "highpointPhotos/connecticut/ct8.jpg"],
         visited: true,
         description: `Despite trips through Yellowstone, The Grand Tetons, and Northern New England,\
          I have only ever seen a wild bear on the slopes of Mt. Frissle. The scenery was very nice when i went at the start of Fall<br>
